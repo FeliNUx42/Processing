@@ -1,0 +1,42 @@
+float t = 1;
+float dA = 1;
+float dB = 0.5;
+float f = 0.055;
+float k = 0.062;
+
+Cell[][] grid;
+
+void setup() {
+  size(800, 800);
+
+  grid = new Cell[height][width];
+
+  for (int i=0; i<height; i++) {
+    for (int j=0; j<width; j++) {
+      grid[i][j] = new Cell(j, i, 1, 0);
+    }
+  }
+
+  for (int i=390; i<410; i++) {
+    for (int j=390; j<410; j++) {
+      grid[i][j].b = 1;
+    }
+  }
+}
+
+void draw() {
+  for (int i=0; i<height; i++) {
+    for (int j=0; j<width; j++) {
+      grid[i][j].Copy();
+    }
+  }
+
+  loadPixels();
+  for (int i=0; i<height; i++) {
+    for (int j=0; j<width; j++) {
+      float c = grid[i][j].Update();
+      pixels[i*width + j] = color(c*255);
+    }
+  }
+  updatePixels();
+}

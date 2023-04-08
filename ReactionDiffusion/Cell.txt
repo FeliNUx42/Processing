@@ -1,0 +1,63 @@
+class Cell {
+  int x;
+  int y;
+  float a;
+  float b;
+  float pa;
+  float pb;
+
+  Cell(int _x, int _y, float _a, float _b) {
+    x = _x;
+    y = _y;
+    a = _a;
+    b = _b;
+    pa = _a;
+    pb = _b;
+  }
+
+  void Copy() {
+    pa = a;
+    pb = b;
+  }
+
+  float[] Laplacian() {
+    float w;
+    float _a = 0;
+    float _b = 0;
+
+    for (int i=-1; i<=1; i++) {
+      for (int j=-1; j<=1; j++) {
+        if (i != 0 && j != 0) w = 0.05;
+        else if (i != 0 || j != 0) w = 0.2;
+        else w = -1;
+
+        int _x = x + i;
+        int _y = y + j;
+
+        if (0 > _x || _x >= width) continue;
+        if (0 > _y || _y >= height) continue;
+
+        _a += grid[_y][_x].pa * w;
+        _b += grid[_y][_x].pb * w;
+      }
+    }
+
+    float[] l = { _a, _b };
+
+    return l;
+  }
+
+  float Update() {
+    float[] l = Laplacian();
+
+    println(l[0], l[1]);
+
+    a = pa + (dA*l[0] - pa*pb*pb + f*(1-pa)) * t;
+    b = pb + (dB*l[1] + pa*pb*pb - pb*(k-f)) * t;
+
+    a = constrain(a, 0, 1);
+    b = constrain(b, 0, 1);
+
+    return constrain(a-b, 0, 1);
+  }
+}
