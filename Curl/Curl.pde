@@ -25,7 +25,7 @@ void setup() {
 void draw() {
   fill(0,0,0,1);
   rect(0,0,width,height);
-  /*
+  /* draw perlin noise
     loadPixels();
     
     for (float y=0; y<width; y++) {
@@ -43,7 +43,7 @@ void draw() {
     p.draw();
   }
 
-  /*
+  /* draw vector at mouse position
     PVector dir = curl(mouseX, mouseY);
 
     stroke(255,0,0);
