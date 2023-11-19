@@ -1,7 +1,7 @@
 ArrayList<PVector> points = new ArrayList<PVector>();
 ArrayList<PVector> path = new ArrayList<PVector>();
 
-int order = 2;
+int order = 7;
 int n;
 int total;
 float l;
@@ -57,12 +57,17 @@ void setup() {
     v.add(l/2, l/2);
     path.add(v);
   }
+
+  drawOnce();
 }
 
 void draw() {
   int i = frameCount;
 
-  if (i >= (path.size())) return;
+  if (i >= (path.size())) {
+    noLoop();
+    return;
+  }
 
   PVector v0 = path.get(i-1);
   PVector v1 = path.get(i);

@@ -9,7 +9,7 @@ int count = 80000;
 
 float vel = 1;
 float ang_vel_min = 1;
-float ang_vel_max = 2;
+float ang_vel_max = 10;
 
 float s_angle = PI/6;
 float s_dist = 10;
